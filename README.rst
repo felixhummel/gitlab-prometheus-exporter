@@ -39,6 +39,9 @@ Please note that this fetches **all** projects. This may take a while and
 produces load on your Gitlab instance. For 300 projects it took 10 seconds on
 my server.
 
+There are efforts for native Prometheus integration in Gitlab, e.g.
+https://gitlab.com/gitlab-org/gitlab-workhorse/issues/61
+
 
 Gitlab API
 ----------
