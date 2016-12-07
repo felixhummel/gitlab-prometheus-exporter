@@ -1,0 +1,4 @@
+prometheus-client==0.0.18
+python-gitlab==0.15.1
+requests==2.7.0
+
