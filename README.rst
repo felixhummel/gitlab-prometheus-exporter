@@ -7,10 +7,6 @@ it to `Prometheus <https://prometheus.io/>`__.
 
 Getting Started
 ===============
-Install requirements, e.g.::
-
-    pip install -r requirements.txt
-
 Get your personal access token from
 ``https://git.example.com/profile/personal_access_tokens``
 and create a Gitlab config as described `here
@@ -26,6 +22,19 @@ e.g.::
     url = https://git.example.com/
     private_token = ********************
     EOF
+
+Run with Docker::
+
+    docker run --rm -it \
+    -v ~/.python-gitlab.cfg:/home/monitor/.python-gitlab.cfg \
+    -p 3001:3001 \
+    felix/gitlab-prometheus-exporter
+
+Install from Git
+----------------
+Install requirements, e.g.::
+
+    pip install -r requirements.txt
 
 Run this::
 
