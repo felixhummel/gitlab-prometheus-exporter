@@ -7,13 +7,33 @@ it to `Prometheus <https://prometheus.io/>`__.
 
 Getting Started
 ===============
-::
+Install requirements, e.g.::
+
+    pip install -r requirements.txt
+
+Get your personal access token from
+``https://git.example.com/profile/personal_access_tokens``
+and create a Gitlab config as described `here
+<http://python-gitlab.readthedocs.io/en/stable/cli.html#configuration>`__,
+e.g.::
+
+    cat <<EOF > ~/.python-gitlab.cfg
+    [global]
+    default = example
+    timeout = 5
+
+    [example]
+    url = https://git.example.com/
+    private_token = ********************
+    EOF
+
+Run this::
 
     ./gitlab_exporter.py
 
-::
+Check metrics::
 
-    curl localhost:3001
+    curl localhost:3001/metrics
 
 
 Config
