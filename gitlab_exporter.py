@@ -34,14 +34,13 @@ gitlab_project_count = Gauge('gitlab_project_count', 'Number of projects')
 
 
 def get_stats():
-    log.info('fetching projects')
-    projects = gl.projects.all(all=True)
+    log.info('fetching project count')
+    gitlab_project_count.set(int(gl._raw_get('/projects/all').headers['X-Total']))
     x = gl.sidekiq.job_stats()
     # {'jobs': {'enqueued': 0, 'failed': 140300, 'processed': 211394}}
     sidekiq_jobs_enqueued.set(x['jobs']['enqueued'])
     sidekiq_jobs_enqueued.set(x['jobs']['failed'])
     sidekiq_jobs_enqueued.set(x['jobs']['processed'])
-    gitlab_project_count.set(len(projects))
 
 
 if __name__ == '__main__':
