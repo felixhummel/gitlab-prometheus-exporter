@@ -39,8 +39,8 @@ def get_stats():
     x = gl.sidekiq.job_stats()
     # {'jobs': {'enqueued': 0, 'failed': 140300, 'processed': 211394}}
     sidekiq_jobs_enqueued.set(x['jobs']['enqueued'])
-    sidekiq_jobs_enqueued.set(x['jobs']['failed'])
-    sidekiq_jobs_enqueued.set(x['jobs']['processed'])
+    sidekiq_jobs_failed.set(x['jobs']['failed'])
+    sidekiq_jobs_processed.set(x['jobs']['processed'])
 
 
 if __name__ == '__main__':
