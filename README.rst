@@ -78,3 +78,12 @@ Prometheus Exporter
 -------------------
 https://github.com/prometheus/client_python
 
+Clearing Gitlab's Sidekiq Counters
+----------------------------------
+For an omnibus install::
+
+   /opt/gitlab/embedded/bin/redis-cli -s '/var/opt/gitlab/redis/redis.socket' del resque:gitlab:stat:processed
+   /opt/gitlab/embedded/bin/redis-cli -s '/var/opt/gitlab/redis/redis.socket' del resque:gitlab:stat:failed
+
+http://stackoverflow.com/questions/15834911/how-do-i-reset-my-sidekiq-counters
+
