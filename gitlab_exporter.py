@@ -27,15 +27,18 @@ PORT = int(os.environ.get('PORT', 3001))
 # http://python-gitlab.readthedocs.io/en/stable/cli.html#configuration
 gl = gitlab.Gitlab.from_config()
 
+
 sidekiq_jobs_enqueued = Gauge('sidekiq_jobs_enqueued', 'Total number of enqueued Sidekiq jobs')
 sidekiq_jobs_failed = Gauge('sidekiq_jobs_failed', 'Total number of failed Sidekiq jobs')
 sidekiq_jobs_processed = Gauge('sidekiq_jobs_processed', 'Total number of processed Sidekiq jobs')
 gitlab_project_count = Gauge('gitlab_project_count', 'Number of projects')
+gitlab_user_count = Gauge('gitlab_user_count', 'Number of users')
 
 
 def get_stats():
     log.info('fetching project count')
     gitlab_project_count.set(int(gl._raw_get('/projects/all').headers['X-Total']))
+    gitlab_user_count.set(int(gl._raw_get('/users').headers['X-Total']))
     x = gl.sidekiq.job_stats()
     # {'jobs': {'enqueued': 0, 'failed': 140300, 'processed': 211394}}
     sidekiq_jobs_enqueued.set(x['jobs']['enqueued'])
